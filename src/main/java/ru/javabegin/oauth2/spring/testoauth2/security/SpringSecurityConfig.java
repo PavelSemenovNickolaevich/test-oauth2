@@ -26,7 +26,8 @@ public class SpringSecurityConfig {
 
         // все сетевые настройки
         http.authorizeRequests()
-                .antMatchers("/login").permitAll() // анонимный пользователь сможет выполнять запросы только по этим URI
+                .antMatchers("/user/*").hasRole("user") // анонимный пользователь сможет выполнять запросы только по этим URI
+                .antMatchers("/admin/*").hasRole("admin")
                 .anyRequest().authenticated() // остальной API будет доступен только аутентифицированным пользователям
 
                 .and() // добавляем новые настройки, не связанные с предыдущими
